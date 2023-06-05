@@ -9,6 +9,9 @@ class Publicacion extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['titulo', 'descripcion', 'foto'];
+
+
     public function famoso()
     {
         return $this->belongsTo(Famoso::class);
@@ -35,5 +38,10 @@ class Publicacion extends Model
     public function links()
     {
         return $this->hasMany(Link::class);
+    }
+
+    public function imagenes()
+    {
+        return $this->hasMany(Imagen::class);
     }
 }

@@ -87,8 +87,9 @@ class ProductoCategoriaController extends Controller
      * @param  \App\Models\producto_categoria  $producto_categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(producto_categoria $producto_categoria)
+    public function destroy(producto_categoria $producto_categoria, Producto $producto)
     {
-        //
+        $producto->delete();
+        return redirect()->route('productos.index');
     }
 }

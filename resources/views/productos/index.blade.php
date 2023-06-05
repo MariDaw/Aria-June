@@ -6,6 +6,8 @@
     </x-slot>
 
 
+
+
     <livewire:filtrado-productos/>
 </x-app-layout>
 @include('components.footer')

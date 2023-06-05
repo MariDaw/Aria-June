@@ -32,9 +32,9 @@
                                             class=" ml-32 aspect-w-1 aspect-h-1 w-[400px] h-[500px] overflow-hidden rounded-md bg-gray-200  ">
                                             <a href="{{ route('show/producto', [$producto]) }}">
 
-                                                <img src="{{asset('../'.$producto->foto)}}"
+                                                <img src="{{asset('../'.$producto->imagen)}}"
                                                     alt="Producto"
-                                                    class="h-96 w-96 p-12   bg-white object-center lg:h-full lg:w-full">{{$producto->foto}}
+                                                    class="h-96 w-96 p-12   bg-white object-center lg:h-full lg:w-full">{{$producto->imagen}}
                                             </a>
                                         </div>
                                         </div>

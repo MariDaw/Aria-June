@@ -4,6 +4,9 @@
             <div class="p-6 flex bg-white border-b border-gray-200">
                 <x-plantilla>
  <div class="bg-white">
+    @if (Auth::user()->rol == "admin")
+        <a type="button" href="{{ route('publicaciones.create') }}" class="bg-indigo-500 px-12 py-2 rounded text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out">Nueva Publicación +</a>
+    @endif
     {{-- Menú desplegable hecho con livewire no funciona si esta el buscador y el paginador --}}
         {{-- <select class="rounded-lg" name="famosoSelect" id="famosoSelect" wire:model="famosoSelect">
             <option value="All" selected> All</option>
@@ -59,8 +62,10 @@
                                                             </a>
                                                         </h3>
 
-                                                        <p class="mt-1 text-sm text-gray-500">
+                                                        <p class="mt-1 mb-3 text-sm text-gray-500">
                                                             {{ $publicacion->descripcion }}</p>
+
+
 
                                                             <form action="{{ route('anadiralperfil', $publicacion) }}" method="POST">
                                                                 @csrf
@@ -72,19 +77,46 @@
                                                             <p class="animate-bounced text-red-400">
                                                                 @if ($valoraciones->where('publicacion_id', $publicacion->id)->first() == null)
                                                                 @else
-                                                                 {{$valoraciones->where('publicacion_id', $publicacion->id)->count()}} 
+                                                                 {{$valoraciones->where('publicacion_id', $publicacion->id)->count()}}
                                                                     likes
                                                                 @endif
                                                                 </p>
+
+                                                                @if (Auth::user()->rol == "admin")
+                                                                <a href="/publicaciones/{{ $publicacion->id }}/edit"
+                                                                        class="px-4 py-1 lg:ml-40 md:ml-10 sm:ml-10 items-right text-sm text-white bg-yellow-700 rounded">Editar</a>
+
+
+                                                                        <form action="/publicaciones/{{ $publicacion->id}}" method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button onclick="return confirm('¿Seguro? Borrarás la publicación')" class="px-4 py-1 mt-5 text-sm lg:ml-40 md:ml-10 sm:ml-10 text-white bg-black rounded" type="submit">Borrar</button>
+                                                                        </form>
+
+                                                                        {{-- <form action="/productos/{{ $producto->id }}" method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button onclick="return confirm('¿Seguro? Borrarás todas las imágenes')" class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
+                                                                        </form> --}}
+                                                                @endif
                                                         <div>
 
                                                         </div>
                                                     </div>
                                                 </div>
+
+
                                             </div>
 
                                             @endforeach
-                                            {{-- Paginador de publicaciones realizado mediante livewire --}}
+
+
+
+
+                                </tbody>
+                            </table>
+
+                                                                      {{-- Paginador de publicaciones realizado mediante livewire --}}
                                             {{ $publicaciones->links() }}
 
                                 </x-plantilla>

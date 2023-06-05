@@ -155,7 +155,7 @@
                         <a href="{{ route('publicaciones.index') }}" class="flex font-semibold justify-start text-indigo-600 text-sm mt-2">
                             Ver más!
                           </a>
-                        <div class="flex ">
+                        <div class="grid sm:grid-cols-1 lg:grid-cols-4">
                             <a href="publicacion" class=""><img class="border-1 m-2 w-60 h-96 hover:scale-105" src="img/home2.jpg"  alt="Home Explorer"></a>
                             <a href="publicacion" class=""><img class="border-1 m-2 w-60 h-96 hover:scale-105" src="img/home3.jpg"  alt="Home Explorer"></a>
                             <a href="publicacion" class=""><img class="border-1 m-2 w-60 h-96 hover:scale-105" src="img/home4.jpg"  alt="Home Explorer"></a>

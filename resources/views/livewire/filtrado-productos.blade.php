@@ -5,9 +5,15 @@
                 <div class="ml-180">
                     <x-plantilla>
 
+
+
                         <div class="bg-white">
+                            @if (Auth::user()->rol == "admin")
+                            <a type="button" href="{{ route('productos.create') }}" class="bg-indigo-500 px-12 py-2 rounded text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out">Nuevo Producto +</a>
+                            @endif
+                            <br>
                              <!-- Menú Desplegable con livewire -->
-                            <select name="productoSelect" id="productoSelect" wire:model="productoSelect">
+                            <select class="mt-3" name="productoSelect" id="productoSelect" wire:model="productoSelect">
                                 <option value="All" selected>All</option>
                                 @foreach ($categorias as $categoria)
                                     <option value="{{ $categoria->nombre }}">{{ $categoria->nombre }}</option>
@@ -25,18 +31,38 @@
                                 <div
                                 class="grid grid-cols-1 mt-10 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                                 @foreach ($productos as $producto)
+
                                     <a href="{{ route('show/producto', [$producto]) }}">
                                         <div class="group">
                                                 <div
                                                     class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                                                    <img src="{{$producto->foto}}"
-                                                        alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
+                                                    <img src="{{$producto->imagen}}"
+                                                        alt="Producto"
                                                         class="h-full w-full object-cover object-center group-hover:opacity-75">
                                                 </div>
                                                 <h3 class="mt-4 text-sm text-gray-700">{{ $producto->titulo }}</h3>
                                                 <h2 class="mt-2 text-sm text-gray-600">{{ $producto->descripcion }}</h2>
                                                 <p class="mt-1 text-lg font-medium text-gray-900">
                                                     {{ $producto->precio }}&euro;</p>
+
+                                                @if (Auth::user()->rol == "admin")
+                                                <a href="/productos/{{ $producto->id }}/edit"
+                                                        class="px-4 py-1 text-sm text-white bg-blue-600 rounded">Editar</a>
+
+
+                                                        <form action="/productos/{{ $producto->id}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button onclick="return confirm('¿Seguro? Borrarás el producto')" class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
+                                                        </form>
+
+                                                        {{-- <form action="/productos/{{ $producto->id }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button onclick="return confirm('¿Seguro? Borrarás todas las imágenes')" class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
+                                                        </form> --}}
+                                                @endif
+
                                                 <div class=" flex text-sm text-gray-900 ">
                                                      <!-- Añadir al carrito -->
                                                     <form action="{{ route('anadiralcarrito', $producto) }}"
@@ -51,9 +77,10 @@
                                                     <form action="{{ route('productoperfil', $producto) }}" method="POST">
                                                         @csrf
                                                         @method('POST')
-                                                        <button type="submit" class="px-4 py-1 text-sm ml-16 text-white mb-5 bg-black  rounded">Save</button>
+                                                        <button type="submit" id="savePro"  class="px-4 py-1 text-sm ml-16 text-white mb-5 bg-black  rounded">Save</button>
 
                                                     </form>
+
 
                                                 </div>
                                         </div>
@@ -62,6 +89,22 @@
                                     </div>
                                 </div>
                                 {{-- {{ $productos->links() }} --}}
+
+
+                                <td class="px-6 py-4">
+                                    @if (Auth::user()->rol == "admin")
+
+
+
+                                            @endif
+                                        </td>
+                            </tr>
+
+
+
+                    </tbody>
+                </table>
+
                             </div>
                     </x-plantilla>
                 </div>
@@ -72,3 +115,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     @livewireScripts
+
+<script>
+    var buttons = document.querySelectorAll("#savePro");
+
+
+
+
+</script>
+<style>
+    .active {
+  background: blue;
+}
+</style>

@@ -17,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Mail\ContactMail;
 use App\Models\Publicacion;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,4 +129,46 @@ Route::middleware(['auth'])->group(function () {
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 });
 
+// Modo Admin
+Route::middleware(['auth', 'can:solo-admin'])->group(function () {
+
+
+    Route::resource('/productos', ProductoController::class);
+    Route::resource('/publicaciones', PublicacionController::class);
+        // Route::get('/productos/index', [ProductoController::class, 'edit']);
+        // Route::get('/productos/index', [ProductoController::class, 'create']);
+        // Route::get('/productos/index', [ProductoController::class, 'store']);
+        // Route::get('/productos/index', [ProductoController::class, 'update']);
+
+
+        //     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
+        //     Route::get('/productos/{id}/store', [ProductoController::class, 'store']);
+        // Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
+        // Route::put('/productos/{id}', [ProductoController::class, 'update'])
+        //     ->name('productos.update');
+
+
+
+        // Route::get('/productos/index', [ProductoController::class, 'edit']);
+        // // Route::get('/productos/create/{id}', [ProductoController::class, 'create']);
+        // Route::post('/productos', [ProductoController::class, 'store'])
+        //     ->name('productos.store');
+
+
+
+        //     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
+        // Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
+        // Route::put('/productos/{id}', [ProductoController::class, 'update'])
+        //     ->name('productos.update');
+
+
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    Route::resource('/productos', ProductoController::class);
+    Route::resource('/publicaciones', PublicacionController::class);
+    Route::get('/dashboard', function(){
+        return view('dashboard');
+    })->name('dashboard');
+});
 require __DIR__.'/auth.php';

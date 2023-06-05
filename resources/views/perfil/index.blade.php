@@ -88,7 +88,7 @@
                             <div
                                 class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden  hover:scale-110 rounded-md ">
                                 <a href="{{ route('show/producto', [$savePro->producto]) }}">
-                                    <img src="{{asset('../'.$savePro->producto->foto)}}"
+                                    <img src="{{asset('../'.$savePro->producto->imagen)}}"
                                         alt="{{$savePro->producto->titulo}}"
                                         class="h-48 w-40  object-center ">
                                 </a>

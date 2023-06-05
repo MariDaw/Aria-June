@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
 use App\Models\Categoria;
+use App\Models\Imagen;
 use App\Models\Producto;
 use App\Models\producto_categoria;
 use App\Models\Save;
+
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
+use Stripe\Product;
 
 class ProductoController extends Controller
 {
@@ -21,14 +26,18 @@ class ProductoController extends Controller
     {
         $productos = Producto::all();
         $categorias = Categoria::all();
+        $imagenes = Imagen::all();
         $prodCategorias = producto_categoria::all();
 
         return view('productos.index', [
             'productos' => $productos,
             'categorias' => $categorias,
             'prodCategorias' => $prodCategorias,
+            'imagenes' => $imagenes,
         ]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +46,13 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        $producto = new Producto();
+
+        return view('productos.create', [
+            'producto' => $producto,
+        ]);
+
+        return view('productos.create');
     }
 
     /**
@@ -46,9 +61,32 @@ class ProductoController extends Controller
      * @param  \App\Http\Requests\StoreProductoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductoRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titulo' => 'required',
+            'descripcion' => 'required',
+            'precio' => 'required',
+            'imagen' => 'required|image|mimes:jpeg,png,svg|max:1024'
+        ]);
+
+        $data= new Producto();
+        $data->titulo = $request->titulo;
+        $data->descripcion = $request->descripcion;
+        $data->precio = $request->precio;
+
+
+         if($imagen = $request->file('imagen')) {
+             $rutaGuardarImg = 'img/Tienda/';
+             $imagenProducto = date('YmdHis'). "." . $imagen->getClientOriginalExtension();
+             $imagen->move($rutaGuardarImg, $imagenProducto);
+             $data['imagen'] = "$imagenProducto";
+         }
+
+         $data->save();
+
+         return redirect()->route('productos.index');
+
     }
 
     /**
@@ -70,9 +108,15 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+
+        return view('productos.edit', [
+            'producto' => $producto,
+        ]);
+
+        // return view('productos.edit', compact('producto'));
     }
 
     /**
@@ -82,21 +126,51 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductoRequest $request, Producto $producto)
+    public function update(Request $request, $prod)
     {
-        //
+        $request->validate([
+            'titulo' => 'required',
+            'descripcion' => 'required',
+            'precio' => 'required',
+            'imagen' => ''
+        ]);
+
+
+         $producto = Producto::where('id', $prod)->first();
+         $producto->titulo = $request->titulo;
+         $producto->descripcion = $request->descripcion;
+         $producto->precio = $request->precio;
+
+         if($imagen = $request->file('imagen')){
+            $rutaGuardarImg = 'img/Tienda';
+            $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImg, $imagenProducto);
+            $producto['imagen'] = "$imagenProducto";
+         }
+
+         $producto->save();
+         return redirect()->route('productos.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Producto  $producto
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Producto $producto)
+
+    public function destroy($id)
     {
-        //
+        // buscas el padre
+        $result = Producto::where('id', $id)->first();
+
+        //buscas el hijo y lo borras
+        // $resultCate = producto_categoria::find($result->id);
+        // $resultCate->delete();
+
+        $result->carritos()->delete();
+
+
+        // borrar el padre
+        $result->delete();
+
+        return redirect()->route('productos.index');
+
     }
 
-    
+
 }
