@@ -66,13 +66,22 @@
                                                             {{ $publicacion->descripcion }}</p>
 
 
+                                                            {{-- Cmabiar color save --}}
+
 
                                                             <form action="{{ route('anadiralperfil', $publicacion) }}" method="POST">
                                                                 @csrf
                                                                 @method('POST')
-                                                                <button type="submit" class="px-4 py-1 text-sm text-white bg-red-400 rounded">Save</button>
+                                                                {{-- @if ($publicacion->save->estado == 'Save') --}}
+                                                                <button type="submit"  class="px-4 py-1 text-sm text-white bg-red-400 rounded">Save</button>
+                                                                {{-- @else --}}
+                                                                {{-- <button type="submit"  class="px-4 py-1 text-sm text-white bg-green-400 rounded">Saved</button>
+                                                                @endif --}}
+
                                                             </form>
                                                             <br>
+
+
                                                              <!-- Likes publicaciones -->
                                                             <p class="animate-bounced text-red-400">
                                                                 @if ($valoraciones->where('publicacion_id', $publicacion->id)->first() == null)
@@ -84,7 +93,7 @@
 
                                                                 @if (Auth::user()->rol == "admin")
                                                                 <a href="/publicaciones/{{ $publicacion->id }}/edit"
-                                                                        class="px-4 py-1 lg:ml-40 md:ml-10 sm:ml-10 items-right text-sm text-white bg-yellow-700 rounded">Editar</a>
+                                                                        class="px-4 py-1 lg:ml-40 md:ml-10 sm:ml-10 items-right text-sm text-red-600 bg-yellow-200 rounded">Editar</a>
 
 
                                                                         <form action="/publicaciones/{{ $publicacion->id}}" method="POST">

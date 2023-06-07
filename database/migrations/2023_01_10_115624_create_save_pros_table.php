@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('producto_id')->constrained('productos');
             $table->string('texto')->nullable();
+            $table->enum('estado', ['Save', 'Saved'])->default('Save');
             $table->timestamps();
         });
     }

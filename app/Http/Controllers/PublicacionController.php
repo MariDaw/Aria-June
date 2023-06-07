@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePublicacionRequest;
 use App\Http\Requests\UpdatePublicacionRequest;
 use App\Models\Famoso;
+use App\Models\Save;
 use App\Models\Comentario;
 use App\Models\Imagen;
 use App\Models\Link;
 use App\Models\Publicacion;
+
 use App\Models\Valoracion;
 // use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
@@ -26,11 +28,13 @@ class PublicacionController extends Controller
         $publicaciones = Publicacion::all();
         $famosos = Famoso::all();
         $valoraciones = Valoracion::all();
+        $save = Save::all();
 
         return view('publicaciones.index', [
             'publicaciones' => $publicaciones,
             'famosos' => $famosos,
             'valoraciones' => $valoraciones,
+            'save' => $save,
         ]);
     }
 

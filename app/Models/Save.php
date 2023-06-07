@@ -9,6 +9,16 @@ class Save extends Model
 {
     use HasFactory;
 
+    public function getStatusButtonAttribute()
+    {
+        $color =
+        [
+            'Save'    => 'primary',
+            'Saved' => 'warning',
+        ];
+        return $color[$this->estado];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -18,5 +28,5 @@ class Save extends Model
         return $this->belongsTo(Publicacion::class);
     }
 
-    
+
 }

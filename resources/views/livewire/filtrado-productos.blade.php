@@ -77,7 +77,7 @@
                                                     <form action="{{ route('productoperfil', $producto) }}" method="POST">
                                                         @csrf
                                                         @method('POST')
-                                                        <button type="submit" id="savePro"  class="px-4 py-1 text-sm ml-16 text-white mb-5 bg-black  rounded">Save</button>
+                                                        <button type="submit" id="savePro"  class=" px-4 py-1 text-sm ml-16 text-white mb-5 bg-black  rounded">Save</button>
 
                                                     </form>
 

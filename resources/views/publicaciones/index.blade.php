@@ -6,6 +6,7 @@
     </x-slot>
 
                             <livewire:filtrar/>
+                            <livewire:save/>
                             {{-- <livewire:paginador/> --}}
 
 

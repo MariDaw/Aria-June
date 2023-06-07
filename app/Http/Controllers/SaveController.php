@@ -23,11 +23,13 @@ class SaveController extends Controller
         $valoraciones = Valoracion::all();
         $publicaciones = Publicacion::all();
         $famosos = Famoso::all();
+        $save = Save::all();
 
         return view('publicaciones.index', [
             'publicaciones' => $publicaciones,
             'famosos' => $famosos,
             'valoraciones' => $valoraciones,
+            'save' => $save,
         ]);
     }
 
@@ -118,6 +120,8 @@ class SaveController extends Controller
         return redirect()->back()->with('success', 'Publicación añadida al perfil.');
     }
 
+
+
     /* Función que quita una publicación del perfil*/
 
     public function unsave($id)
@@ -130,6 +134,12 @@ class SaveController extends Controller
         return redirect()->route('perfil.index');
     }
 
+
+    public function listOrder()
+    {
+        $orders = Save::latest()->get();
+        return view('orders.list',['orders' => $orders]);
+    }
 
 
 }
