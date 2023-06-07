@@ -8,6 +8,8 @@ use App\Models\Categoria;
 use App\Models\Imagen;
 use App\Models\Producto;
 use App\Models\producto_categoria;
+
+
 use App\Models\Save;
 
 use Illuminate\Http\Request;
@@ -100,6 +102,8 @@ class ProductoController extends Controller
         return view('productos.show', [
             'producto' => $producto,
         ]);
+
+
     }
 
     /**
@@ -153,20 +157,27 @@ class ProductoController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Producto $producto, producto_categoria $producto_categoria, Categoria $categoria)
     {
         // buscas el padre
-        $result = Producto::where('id', $id)->first();
+
 
         //buscas el hijo y lo borras
-        // $resultCate = producto_categoria::find($result->id);
+        // $resultCate = Categoria::where('id', $categoria->id)->first();
+
+        $resultCa = producto_categoria::where('producto_id', $producto_categoria->producto_id)->first();
+        $resultCa->delete();
+
+
+
+        $result = Producto::where('id', $producto->id);
+
+        // $result->carritos()->delete();
+
+        $result->delete();
         // $resultCate->delete();
 
-        $result->carritos()->delete();
-
-
         // borrar el padre
-        $result->delete();
 
         return redirect()->route('productos.index');
 

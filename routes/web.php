@@ -132,11 +132,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Modo Admin
-// Route::middleware(['auth', 'can:solo-admin'])->group(function () {
+Route::middleware(['auth', 'can:solo-admin'])->group(function () {
 
 
-//     Route::resource('/productos', ProductoController::class);
-//     Route::resource('/publicaciones', PublicacionController::class);
+    Route::resource('/productos', ProductoController::class);
+    Route::resource('/publicaciones', PublicacionController::class);
         // Route::get('/productos/index', [ProductoController::class, 'edit']);
         // Route::get('/productos/index', [ProductoController::class, 'create']);
         // Route::get('/productos/index', [ProductoController::class, 'store']);
@@ -164,7 +164,7 @@ Route::middleware(['auth'])->group(function () {
         //     ->name('productos.update');
 
 
-// });
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::resource('/productos', ProductoController::class);

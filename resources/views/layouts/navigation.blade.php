@@ -16,25 +16,25 @@
         <!-- Navigation Links -->
         <div class="lg:open md:open sm:open xs:hidden flex w-full space-x-0 sm:-my-px xs:flex " style="background-color: WHITE;">
             @if (Auth::user()->rol == "admin")
-            <div class="w-40 py-2 px-3 lg:flex md:flex sm:flex hidden  " style="background-color: #2bce90d0;  justify-content:center; align-items:center;">
+            <div class="lg:w-40 sm:w-32 py-2 px-3 lg:flex md:flex sm:flex hidden  " style="background-color: #2bce90d0;  justify-content:center; align-items:center;">
                 <x-nav-link :href="route('dashboard')" > <!-- Home -->
-                    <img class="flex lg:ml-12 sm:ml-0 md:ml-4  hover:scale-110" src="{{url('../img/hogar.png') }}" alt="Home">
+                    <img class="flex lg:ml-12 sm:ml-8 md:ml-10  hover:scale-110" src="{{url('../img/hogar.png') }}" alt="Home">
                 </x-nav-link>
             </div>
-            <div class="w-40 py-2 px-3 lg:flex md:flex sm:flex hidden" style="background-color: #7283E1; justify-content:center; align-items:center;">
+            <div class="lg:w-40  sm:w-32 py-2 px-3 lg:flex md:flex sm:flex hidden" style="background-color: #7283E1; justify-content:center; align-items:center;">
                 <x-nav-link :href="route('publicaciones.index')" :active="request()->routeIs('publicaciones.index')"> <!-- Publicaciones -->
-                    <img class="flex lg:ml-12 sm:ml-0 md:ml-4 hover:scale-110" src="{{url('../img/brujula.png') }}" alt="Publicaciones">
+                    <img class="flex lg:ml-12 sm:ml-8 md:ml-10 hover:scale-110" src="{{url('../img/brujula.png') }}" alt="Publicaciones">
                 </x-nav-link>
             </div>
-            <div class="bg-yellow-200 w-40 py-2 px-3 lg:flex md:flex sm:flex hidden" style="background-color: #fcde468a;  justify-content:center; align-items:center; ">
+            <div class="bg-yellow-200 lg:w-40 sm:w-32 py-2 px-3 lg:flex md:flex sm:flex hidden" style="background-color: #fcde468a;  justify-content:center; align-items:center; ">
             <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">  <!-- Productos -->
-                <img class="flex lg:ml-12 sm:ml-0 md:ml-4 hover:scale-110" src="{{url('../img/shop.png') }}" alt="Tienda">
+                <img class="flex lg:ml-12 sm:ml-8 md:ml-10 hover:scale-110" src="{{url('../img/shop.png') }}" alt="Tienda">
             </x-nav-link>
 
             </div>
-            <div class="bg-green-300 w-40 py-2 px-3 lg:flex md:flex sm:flex hidden" style="background-color: #7283E1;  justify-content:center; align-items:center;">
+            <div class="bg-green-300 lg:w-40 sm:w-32 py-2 px-3 lg:flex md:flex sm:flex hidden" style="background-color: #7283E1;  justify-content:center; align-items:center;">
                 <x-nav-link :href="route('perfil.index')" :active="request()->routeIs('perfil.index')">  <!-- Perfil -->
-                    <img class="flex lg:ml-12 sm:ml-0 md:ml-4 hover:scale-110" src="{{url('../img/user.png') }}" alt="Perfil" >
+                    <img class="flex lg:ml-12 sm:ml-8 md:ml-10 hover:scale-110" src="{{url('../img/user.png') }}" alt="Perfil" >
                 </x-nav-link>
                 </div>
 

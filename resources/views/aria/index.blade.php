@@ -119,7 +119,7 @@
                     <li><a href="publicacion"><img class="flex ml-0 hover:scale-110" src="{{url('../img/brujula.png') }}" alt="Publicaciones"></a></li>
                 </ul>
                 <ul id="tienda">
-                    <li><a href="productos"><img class="flex ml-0 hover:scale-110" src="{{url('../img/shop.png') }}" alt="Tienda"></a></li>
+                    <li><a href="{{ route('login') }}"><img class="flex ml-0 hover:scale-110" src="{{url('../img/shop.png') }}" alt="Tienda"></a></li>
                 </ul>
               </nav>
 
@@ -132,15 +132,15 @@
 
 
             @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                <div class=" open fixed top-0 right-0 px-6 py-4 sm:flex flex ">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        <a href="{{ url('/dashboard') }}" class=" flex text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 mr-4 dark:text-gray-500 underline">Iniciar Sesión</a>
+                        <a href="{{ route('login') }}" class=" flex text-sm text-gray-700 mr-4 dark:text-gray-500 underline "><img class="flex ml-0 hover:scale-110" src="{{url('../img/proximo.png') }}" alt="Publicaciones"></a>
 
-                        @if (Route::has('register'))
+                        {{-- @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="mr-8 text-sm text-gray-700 dark:text-gray-500 underline">Registrarse</a>
-                        @endif
+                        @endif --}}
                     @endauth
                 </div>
             @endif

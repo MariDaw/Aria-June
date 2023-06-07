@@ -2322,6 +2322,14 @@ select {
     margin-left: 1rem;
   }
 
+  .sm\:ml-9 {
+    margin-left: 2.25rem;
+  }
+
+  .sm\:ml-8 {
+    margin-left: 2rem;
+  }
+
   .sm\:block {
     display: block;
   }
@@ -2338,6 +2346,14 @@ select {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+  }
+
+  .sm\:w-3 {
+    width: 0.75rem;
+  }
+
+  .sm\:w-32 {
+    width: 8rem;
   }
 
   .sm\:max-w-md {
@@ -2549,6 +2565,10 @@ select {
 
   .lg\:w-full {
     width: 100%;
+  }
+
+  .lg\:w-40 {
+    width: 10rem;
   }
 
   .lg\:max-w-7xl {
