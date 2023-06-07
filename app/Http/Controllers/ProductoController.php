@@ -157,22 +157,21 @@ class ProductoController extends Controller
     }
 
 
-    public function destroy(Producto $producto, producto_categoria $producto_categoria, Categoria $categoria)
+    public function destroy(Producto $producto, producto_categoria $producto_categoria)
     {
         // buscas el padre
 
+        $result = Producto::where('id', $producto->id)->first();
 
-        //buscas el hijo y lo borras
-        // $resultCate = Categoria::where('id', $categoria->id)->first();
+        // buscas al hijo y lo borras
 
-        $resultCa = producto_categoria::where('producto_id', $producto_categoria->producto_id)->first();
+        $resultCa = producto_categoria::where('producto_id', $producto->id);
         $resultCa->delete();
 
 
 
-        $result = Producto::where('id', $producto->id);
 
-        // $result->carritos()->delete();
+        $result->carritos()->delete();
 
         $result->delete();
         // $resultCate->delete();
