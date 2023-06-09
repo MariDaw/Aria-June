@@ -50,6 +50,8 @@ class PublicacionController extends Controller
         return view('publicaciones.create', [
             'publicacion' => $publicacion,
         ]);
+
+        return view('publicaciones.create');
     }
 
     /**
@@ -58,24 +60,33 @@ class PublicacionController extends Controller
      * @param  \App\Http\Requests\StorePublicacionRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePublicacionRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'titulo' => 'required',
             'descripcion' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,svg|max:1024'
+
+
         ]);
 
-         $publicacion = $request->all();
+        $data = new Publicacion();
+        // $dataF = new Famoso();
+        $data->titulo = $request->titulo;
+        $data->descripcion = $request->descripcion;
+        // $data->famoso_id = $request->famoso_id;
+        // $dataF->nombre = $request->famoso_id;
+
 
          if($foto = $request->file('foto')) {
-             $rutaGuardarImg = 'foto/';
+             $rutaGuardarImg = 'img/publicaciones';
              $imagenPublicacion = date('YmdHis'). "." . $foto->getClientOriginalExtension();
              $foto->move($rutaGuardarImg, $imagenPublicacion);
-             $publicacion['foto'] = "$imagenPublicacion";
+             $data['foto'] = "$imagenPublicacion";
          }
 
-         Publicacion::create($publicacion);
+         $data->save();
+        
          return redirect()->route('publicaciones.index');
     }
 
@@ -121,23 +132,27 @@ class PublicacionController extends Controller
      * @param  \App\Models\Publicacion  $publicacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publicacion $publicacion)
+    public function update(Request $request, $publi)
     {
         $request->validate([
             'titulo' => 'required',
             'descripcion' => 'required',
-            'foto' => 'required'
+            'foto' => ''
         ]);
-         $publi = $request->all();
+
+        $publicacion = Publicacion::where('id', $publi)->first();
+        $publicacion->titulo = $request->titulo;
+        $publicacion->descripcion = $request->descripcion;
+
+
          if($foto = $request->file('foto')){
-            $rutaGuardarImg = 'foto/';
+            $rutaGuardarImg = 'img/publicaciones';
             $imagenPublicacion = date('YmdHis') . "." . $foto->getClientOriginalExtension();
             $foto->move($rutaGuardarImg, $imagenPublicacion);
-            $publi['foto'] = "$imagenPublicacion";
-         }else{
-            unset($publi['foto']);
+            $publicacion['foto'] = "$imagenPublicacion";
          }
-         $publicacion->update($publi);
+
+         $publicacion->save();
          return redirect()->route('publicaciones.index');
     }
 
@@ -151,25 +166,31 @@ class PublicacionController extends Controller
 
 
 
-    public function destroy($id)
+    public function destroy(Publicacion $publicacion)
     {
-        $publicacion = Publicacion::findOrFail($id);
-        $imagenes = count($publicacion->imagenes);
-        $comentarios = count($publicacion->comentarios);
-        if ($imagenes > 0) {
-            for ($i=0; $i < $imagenes; $i++) {
-            $publicacion->imagenes[$i]->delete();
-            }
-        }
-        if ($comentarios > 0) {
-            for ($i=0; $i < $comentarios; $i++) {
-            $publicacion->comentarios[$i]->delete();
-            }
-        }
-        $publicacion->delete();
 
-        return redirect()->back()
-            ->with('success', 'Publicación borrada correctamente');
+        // Buscas al padre
+        $result = Publicacion::where('id', $publicacion->id)->first();
+
+
+        $resultSa = Save::where('publicacion_id', $publicacion->id);
+        $resultSa->delete();
+
+        $resultLi = Link::where('publicacion_id', $publicacion->id);
+        $resultLi->delete();
+
+        // $resultVa = Valoracion::where('publicacion_id', $publicacion->id);
+        // $resultVa->delete();
+
+        // $resultCom = Comentario::where('publicacion_id', $publicacion->id);
+        // $resultCom->delete();
+
+
+        $result->delete();
+
+
+        return redirect()->route('publicaciones.index');
+
     }
 
 

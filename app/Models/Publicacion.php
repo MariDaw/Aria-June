@@ -40,8 +40,5 @@ class Publicacion extends Model
         return $this->hasMany(Link::class);
     }
 
-    public function imagenes()
-    {
-        return $this->hasMany(Imagen::class);
-    }
+    
 }

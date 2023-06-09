@@ -11,7 +11,7 @@ use App\Models\producto_categoria;
 
 
 use App\Models\Save;
-
+use App\Models\SavePro;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -86,6 +86,7 @@ class ProductoController extends Controller
          }
 
          $data->save();
+
 
          return redirect()->route('productos.index');
 
@@ -168,7 +169,8 @@ class ProductoController extends Controller
         $resultCa = producto_categoria::where('producto_id', $producto->id);
         $resultCa->delete();
 
-
+        $resultSa = SavePro::where('producto_id', $producto->id);
+        $resultSa->delete();
 
 
         $result->carritos()->delete();

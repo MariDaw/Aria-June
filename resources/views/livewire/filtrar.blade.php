@@ -102,11 +102,7 @@
                                                                             <button onclick="return confirm('¿Seguro? Borrarás la publicación')" class="px-4 py-1 mt-5 text-sm lg:ml-40 md:ml-10 sm:ml-10 text-white bg-black rounded" type="submit">Borrar</button>
                                                                         </form>
 
-                                                                        {{-- <form action="/productos/{{ $producto->id }}" method="POST">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button onclick="return confirm('¿Seguro? Borrarás todas las imágenes')" class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
-                                                                        </form> --}}
+                                                                        
                                                                 @endif
                                                         <div>
 

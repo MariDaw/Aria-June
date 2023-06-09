@@ -34,7 +34,7 @@ class Filtrar extends Component
             $publicaciones = Publicacion::all();
         }
          else {
-            $famosoLive = Famoso::where('nombre', $this->famosoSelect)->get()[0]->id;
+            $famosoLive = Publicacion::where('titulo', $this->famosoSelect)->get()[0]->id;
 
             $publicaciones = Publicacion:: where('famoso_id', $famosoLive)->get() ;
 
