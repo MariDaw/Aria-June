@@ -78,12 +78,12 @@ class ProductoController extends Controller
         $data->precio = $request->precio;
 
 
-         if($imagen = $request->file('imagen')) {
-             $rutaGuardarImg = 'img/Tienda/';
-             $imagenProducto = date('YmdHis'). "." . $imagen->getClientOriginalExtension();
-             $imagen->move($rutaGuardarImg, $imagenProducto);
-             $data['imagen'] = "$imagenProducto";
-         }
+        if($imagen = $request->file('imagen')) {
+            $rutaGuardarImg = 'img/Tienda/';
+            $imagenProducto =  $imagen->getClientOriginalName();
+            $imagen->move($rutaGuardarImg, $imagenProducto);
+            $data['imagen'] = "img/Tienda/".$imagenProducto;
+        }
 
          $data->save();
 
@@ -146,12 +146,12 @@ class ProductoController extends Controller
          $producto->descripcion = $request->descripcion;
          $producto->precio = $request->precio;
 
-         if($imagen = $request->file('imagen')){
-            $rutaGuardarImg = 'img/Tienda';
-            $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+         if($imagen = $request->file('imagen')) {
+            $rutaGuardarImg = 'img/Tienda/';
+            $imagenProducto =  $imagen->getClientOriginalName();
             $imagen->move($rutaGuardarImg, $imagenProducto);
-            $producto['imagen'] = "$imagenProducto";
-         }
+            $producto['imagen'] = "img/Tienda/".$imagenProducto;
+        }
 
          $producto->save();
          return redirect()->route('productos.index');

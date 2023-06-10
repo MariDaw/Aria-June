@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('descripcion');
             $table->string('foto');
-            $table->foreignId('famoso_id')->constrained('famosos');
+            // $table->foreignId('famoso_id')->constrained('famosos');
             $table->timestamps();
         });
     }

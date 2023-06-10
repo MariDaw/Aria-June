@@ -29,12 +29,14 @@ class PublicacionController extends Controller
         $famosos = Famoso::all();
         $valoraciones = Valoracion::all();
         $save = Save::all();
+        $link = Link::all();
 
         return view('publicaciones.index', [
             'publicaciones' => $publicaciones,
             'famosos' => $famosos,
             'valoraciones' => $valoraciones,
             'save' => $save,
+            'link' => $link,
         ]);
     }
 
@@ -46,9 +48,13 @@ class PublicacionController extends Controller
     public function create()
     {
         $publicacion = new Publicacion();
+        $link = new Link();
+        $data = Publicacion::join('links', 'links.publicacion_id', '=', 'publicacions.id');
 
         return view('publicaciones.create', [
             'publicacion' => $publicacion,
+            'link' => $link,
+            'data' => $data,
         ]);
 
         return view('publicaciones.create');
@@ -65,28 +71,29 @@ class PublicacionController extends Controller
         $request->validate([
             'titulo' => 'required',
             'descripcion' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,svg|max:1024'
+            'foto' => 'required|image|mimes:jpeg,png,svg|max:1024',
 
 
         ]);
 
         $data = new Publicacion();
-        // $dataF = new Famoso();
+
+
+
         $data->titulo = $request->titulo;
         $data->descripcion = $request->descripcion;
-        // $data->famoso_id = $request->famoso_id;
-        // $dataF->nombre = $request->famoso_id;
 
 
          if($foto = $request->file('foto')) {
-             $rutaGuardarImg = 'img/publicaciones';
-             $imagenPublicacion = date('YmdHis'). "." . $foto->getClientOriginalExtension();
+             $rutaGuardarImg = 'img/publicaciones/';
+             $imagenPublicacion =  $foto->getClientOriginalName();
              $foto->move($rutaGuardarImg, $imagenPublicacion);
-             $data['foto'] = "$imagenPublicacion";
+             $data['foto'] = "img/publicaciones/".$imagenPublicacion;
          }
 
          $data->save();
-        
+
+
          return redirect()->route('publicaciones.index');
     }
 
@@ -145,12 +152,12 @@ class PublicacionController extends Controller
         $publicacion->descripcion = $request->descripcion;
 
 
-         if($foto = $request->file('foto')){
-            $rutaGuardarImg = 'img/publicaciones';
-            $imagenPublicacion = date('YmdHis') . "." . $foto->getClientOriginalExtension();
+        if($foto = $request->file('foto')) {
+            $rutaGuardarImg = 'img/publicaciones/';
+            $imagenPublicacion =  $foto->getClientOriginalName();
             $foto->move($rutaGuardarImg, $imagenPublicacion);
-            $publicacion['foto'] = "$imagenPublicacion";
-         }
+            $publicacion['foto'] = "img/publicaciones/".$imagenPublicacion;
+        }
 
          $publicacion->save();
          return redirect()->route('publicaciones.index');
@@ -166,11 +173,11 @@ class PublicacionController extends Controller
 
 
 
-    public function destroy(Publicacion $publicacion)
+    public function destroy(Publicacion $publicacion, Save $save)
     {
 
         // Buscas al padre
-        $result = Publicacion::where('id', $publicacion->id)->first();
+        $debu = Publicacion::where('id', $publicacion->id)->first();
 
 
         $resultSa = Save::where('publicacion_id', $publicacion->id);
@@ -179,15 +186,7 @@ class PublicacionController extends Controller
         $resultLi = Link::where('publicacion_id', $publicacion->id);
         $resultLi->delete();
 
-        // $resultVa = Valoracion::where('publicacion_id', $publicacion->id);
-        // $resultVa->delete();
-
-        // $resultCom = Comentario::where('publicacion_id', $publicacion->id);
-        // $resultCom->delete();
-
-
-        $result->delete();
-
+        $debu->delete();
 
         return redirect()->route('publicaciones.index');
 

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 use App\Models\Link;
+use App\Models\Publicacion;
+use App\Models\Valoracion;
+use Illuminate\Http\Request;
 
 class LinkController extends Controller
 {
@@ -25,7 +28,15 @@ class LinkController extends Controller
      */
     public function create()
     {
-        //
+        $publicacion = new Publicacion();
+        $link = new Link();
+
+        return view('link.create', [
+            'publicacion' => $publicacion,
+            'link' => $link,
+        ]);
+
+        return back();
     }
 
     /**
@@ -34,9 +45,25 @@ class LinkController extends Controller
      * @param  \App\Http\Requests\StoreLinkRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreLinkRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'prenda' => 'required',
+            'url' => 'required',
+            'publicacion_id'
+
+        ]);
+
+        $data = new Link();
+
+        $data->prenda = $request->prenda;
+        $data->url = $request->url;
+        $data->publicacion_id = $request->publicacion_id;
+
+
+         $data->save();
+
+         return redirect()->route('link.show');
     }
 
     /**
@@ -47,7 +74,15 @@ class LinkController extends Controller
      */
     public function show(Link $link)
     {
-        //
+        $publicacion = Publicacion::all();
+        $valoraciones = Valoracion::all();
+        $links = Link::all();
+        return view('publicaciones.show', [
+            'publicacion' => $publicacion,
+            'valoraciones' => $valoraciones,
+            'links' => $links,
+
+        ]);
     }
 
     /**

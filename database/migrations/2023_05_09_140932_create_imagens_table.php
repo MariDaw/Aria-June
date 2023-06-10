@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('imagens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('publicacion_id')->constrained('publicacions');
+            // $table->foreignId('publicacion_id')->constrained('publicacions');
             $table->foreignId('producto_id')->constrained('productos');
             $table->string('imagen');
             $table->timestamps();

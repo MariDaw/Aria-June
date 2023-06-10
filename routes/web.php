@@ -10,6 +10,7 @@ use App\Http\Controllers\FamosoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\SaveProController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\ValoracionController;
@@ -137,6 +138,8 @@ Route::middleware(['auth', 'can:solo-admin'])->group(function () {
 
     Route::resource('/productos', ProductoController::class);
     Route::resource('/publicaciones', PublicacionController::class);
+    Route::resource('/link', LinkController::class);
+
         // Route::get('/productos/index', [ProductoController::class, 'edit']);
         // Route::get('/productos/index', [ProductoController::class, 'create']);
         // Route::get('/productos/index', [ProductoController::class, 'store']);
@@ -169,6 +172,9 @@ Route::middleware(['auth', 'can:solo-admin'])->group(function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::resource('/productos', ProductoController::class);
     Route::resource('/publicaciones', PublicacionController::class);
+    Route::resource('/link', LinkController::class);
+    // Route::resource('/link/show', [LinkController::class, 'create'])->name('link.create');
+
     Route::get('/dashboard', function(){
         return view('dashboard');
     })->name('dashboard');

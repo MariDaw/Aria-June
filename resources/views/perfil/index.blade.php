@@ -47,7 +47,7 @@
                                 class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden  hover:scale-110 rounded-md">
                                 <a href="{{ route('show/publicacion', [$save->publicacion]) }}">
                                     <img src="{{asset('../'.$save->publicacion->foto)}}"
-                                        alt="{{$save->publicacion->famoso->nombre}}"
+                                        alt="{{$save->publicacion->titulo}}"
                                         class="h-48 w-40  object-center ">
                                 </a>
                             </div>
@@ -56,7 +56,7 @@
                                 <div>
                                     <h3 class="text-sm text-black">
                                         <a href="#">
-                                            {{ $save->publicacion->famoso->nombre }}
+                                            {{ $save->publicacion->titulo }}
                                         </a>
                                     </h3>
 

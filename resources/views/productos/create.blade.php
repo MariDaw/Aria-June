@@ -33,11 +33,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
                             <div class="grid grid-cols-1">
                             <label for="titulo"
-                                class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('nombre') text-red-500 @enderror">
+                                class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('titulo') text-red-500 @enderror">
                                 Titulo:
                             </label>
                             <input type="text" name="titulo" required
-                            class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('nombre') border-red-500 @enderror"
+                            class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('titulo') border-red-500 @enderror"
                             value="{{ old('titulo', $producto->titulo) }}">
 
                             </div>
@@ -106,5 +106,3 @@
                 });
             });
         </script>
-
-

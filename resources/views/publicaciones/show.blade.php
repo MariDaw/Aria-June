@@ -110,7 +110,7 @@
                                                     <h2 class="text-3xl mt-0 mb-3 text-black">
                                                         <a href="#">
 
-                                                            {{ $publicacion->famoso->nombre }}
+                                                            {{ $publicacion->titulo }}
                                                         </a>
                                                     </h2>
 
@@ -130,7 +130,7 @@
                                                             <h3 class="text-sm text-gray-700">
                                                                 <a href="#">
 
-                                                                    {{ $publicacion->famoso->nombre }}
+                                                                    {{ $publicacion->titulo }}
                                                                 </a>
                                                             </h3>
                                                             <p class=" w-72 mt-1 text-sm text-gray-500">
@@ -187,7 +187,11 @@
                                                             </div>
                                                             <div class="flex grid-cols-2 ml-10 mt-12 w-2/3 h-2/3 rounded-xl bg-gray-300 ">
                                                                 <div class="mx-10 mt-10 w-auto h-1/2 "><h1 class="text-3xl text-extrabold mb-5 text-black">PRENDAS</h1>
+                                                                    @if (Auth::user()->rol == "admin")
+                                                                    <a type="button" href="{{ route('link.create') }}" class="bg-indigo-500 px-12 py-2 rounded text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out">Nuevo LInk +</a>
+                                                                    @endif
                                                                 @foreach ($publicacion->links as $link )
+
 
                                                                 <li class="m-0"> <span class="text-bold text-black">{{$link->prenda}}</span></br><a class="text-indigo-600 text-extrabold text-sm  m-0 h-1/3" href="{{$link->url}}">{{$link->url}}</a></li>
                                                                 @endforeach
@@ -246,10 +250,12 @@
                                                                                     @csrf
                                                                                     @method('DELETE')
                                                                                     {{-- <input type="hidden" name="_method" value="DELETE"> --}}
-                                                                                    @if (Auth::user()->id == $comentario->user_id)
+                                                                                    @if (Auth::user()->id == $comentario->user_id OR Auth::user()->rol == "admin")
                                                                                         <button type="submit"  class="btn underline text-xs">Eliminar</button>
 
                                                                                     @endif
+
+
 
 
                                                                                  </form>
@@ -284,7 +290,7 @@
                                   }
                                 });
                                 </script>
-                                
+
 
 
 

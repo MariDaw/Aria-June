@@ -35,21 +35,7 @@
                                     value="{{ old('descripcion', $publicacion->descripcion) }}">
                             </div>
 
-                            {{-- <div class="grid grid-cols-1">
-                                <label for="famoso_id"
-                                    class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('famoso_id') text-red-500 @enderror">
-                                    Nombre famoso_id:
-                                </label>
-                                <input type="text" name="famoso_id"  required
-                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('famoso_id') border-red-500 @enderror"
-                                    value="{{ old('famoso_id', $publicacion->famoso_id) }}">
-                            </div> --}}
-
-                            {{-- Prenda y URL --}}
-                            @foreach ($publicacion->links as $link )
-
-                            {{-- <li class="m-0"> <span class="text-bold text-black">{{$link->prenda}}</span></br><a class="text-indigo-600 text-extrabold text-sm  m-0 h-1/3" href="{{$link->url}}">{{$link->url}}</a></li> --}}
-
+                            {{-- <h3>PRENDAS</h3>
                             <div class="grid grid-cols-1">
                                 <label for="prenda"
                                     class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('prenda') text-red-500 @enderror">
@@ -57,8 +43,9 @@
                                 </label>
                                 <input type="text" name="prenda"  required
                                     class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('prenda') border-red-500 @enderror"
-                                    value="{{ old('prenda', $publicacion->link) }}">
+                                    value="{{ old('prenda', $link->prenda) }}">
                             </div>
+
                             <div class="grid grid-cols-1">
                                 <label for="url"
                                     class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('url') text-red-500 @enderror">
@@ -66,9 +53,12 @@
                                 </label>
                                 <input type="text" name="url"  required
                                     class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('url') border-red-500 @enderror"
-                                    value="{{ old('url', $publicacion->link) }}">
-                            </div>
-                            @endforeach
+                                    value="{{ old('url', $link->url) }}">
+                            </div> --}}
+
+
+
+
 
                         </div>
 

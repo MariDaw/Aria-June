@@ -58,7 +58,7 @@
                                                     <div>
                                                         <h3 class="text-sm text-gray-700">
                                                             <a href="#">
-                                                                {{ $publicacion->famoso->nombre }}
+                                                                {{ $publicacion->titulo }}
                                                             </a>
                                                         </h3>
 
@@ -72,6 +72,13 @@
                                                             <form action="{{ route('anadiralperfil', $publicacion) }}" method="POST">
                                                                 @csrf
                                                                 @method('POST')
+                                                                {{-- <input type="hidden" name="estado" value="{{ $publicacion->save->estado == 'Save' ? 'Saved' : 'Save' }}"/>
+                                                                    @if($publicacion->save->estado == 'Save')
+                                                                        <input type="submit" value="Unpublish"/>
+                                                                    @else
+                                                                        <input type="submit" value="Publish"/>
+                                                                    @endif --}}
+
                                                                 {{-- @if ($publicacion->save->estado == 'Save') --}}
                                                                 <button type="submit"  class="px-4 py-1 text-sm text-white bg-red-400 rounded">Save</button>
                                                                 {{-- @else --}}
@@ -96,13 +103,13 @@
                                                                         class="px-4 py-1 lg:ml-40 md:ml-10 sm:ml-10 items-right text-sm text-red-600 bg-yellow-200 rounded">Editar</a>
 
 
-                                                                        <form action="/publicaciones/{{ $publicacion->id}}" method="POST">
+                                                                        <form method="post" action="/publicaciones/{{ $publicacion->id }}" >
                                                                             @csrf
                                                                             @method('DELETE')
                                                                             <button onclick="return confirm('¿Seguro? Borrarás la publicación')" class="px-4 py-1 mt-5 text-sm lg:ml-40 md:ml-10 sm:ml-10 text-white bg-black rounded" type="submit">Borrar</button>
                                                                         </form>
 
-                                                                        
+
                                                                 @endif
                                                         <div>
 

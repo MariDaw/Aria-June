@@ -107,11 +107,12 @@ class ComentarioController extends Controller
     /* Función que elimina un comentario*/
     public function eliminarcomentario($id) {
 
-        if ($comentario = Comentario::where('user_id', auth()->user()->id)->find($id))
+        if ((Comentario::where('user_id', auth()->user()->id)->find($id)) || (Auth::user()->rol == "admin"))
         {
+            $comentario =Comentario::where('id',$id)->first();
             $comentario->delete();
         } else {
-            return redirect()->back()->with('success', 'No tienes permiso');
+            return redirect()->back()->with('error', 'No tienes permiso');
         }
 
         return redirect()->back();
