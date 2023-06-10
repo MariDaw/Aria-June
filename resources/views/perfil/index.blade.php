@@ -33,7 +33,7 @@
         <div class="flex w-full h-auto  mt-0">
 
 
-            <div class="mx-0  grid grid-cols-2 max-w-2xl py-5 px-0 sm:py-5 sm:px-0 lg:max-w-7xl lg:px-8">
+            <div class="mx-0  grid lg:grid-cols-2 md:grid-cols-1 max-w-2xl py-5 px-0 sm:py-5 sm:px-0 lg:max-w-7xl lg:px-8">
                  <!-- Guarda las publicaciones en el perfil -->
                 <div class=" mx-10 ">
                 <h2 class="text-2xl flex p-2 w-full tracking-tight text-gray-600" style="font-family: 'Roboto Condensed', sans-serif; background-color: white;"><img class="mr-3" src="img/save.png" alt=""> PUBLICACIONES GUARDADAS

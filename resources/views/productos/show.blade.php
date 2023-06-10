@@ -18,9 +18,9 @@
 
                                   </a>
                                 <div
-                                    class="mt-0 mx-10 grid grid-cols-2  ">
+                                    class="mt-0 mx-10 grid lg:grid-cols-2 md:grid-cols-2 xs:grid-cols-1">
 
-                                    <div class="group relative ">
+                                    <div class="lg:group lg:relative  ">
                                         {{-- <h2 class="text-3xl mt-0 mb-3 text-gray-700">
                                                        <a href="#">
 
@@ -29,7 +29,7 @@
                                                    </h2> --}}
 
                                         <div
-                                            class=" ml-32 aspect-w-1 aspect-h-1 w-[400px] h-[500px] overflow-hidden rounded-md bg-gray-200  ">
+                                            class=" flex lg:ml-32 md:ml-5 xs:ml-5 md:mr-10 md:mt-16 xs:mt-10 aspect-w-1 aspect-h-1 lg:w-[400px] lg:h-[500px] md:w-[280px] md:h-[380px] sm:w-[280px] sm:h-[380px]  overflow-hidden rounded-md bg-gray-200  ">
                                             <a href="{{ route('show/producto', [$producto]) }}">
 
                                                 <img src="{{asset('../'.$producto->imagen)}}"
@@ -38,11 +38,11 @@
                                             </a>
                                         </div>
                                         </div>
-                                        <div class=" my-28 py-0 text-left pl-10 " style="font-family: 'Roboto Condensed', sans-serif">
-                                        <h3 class="mb-0 text-4xl text-black text-bold ">{{ $producto->titulo }}</h3>
+                                        <div class=" my-28 py-0 text-left pl-10 xs:mt-3" style="font-family: 'Roboto Condensed', sans-serif">
+                                        <h3 class="mb-0 xs:ml-10 text-4xl text-black text-bold ">{{ $producto->titulo }}</h3>
                                         <div class="border mb-5 mr-32 border-b-2"></div>
                                         <a href="{{ route('productos.index') }}" class=" text-xs text-lime-600 border-b-black-2">Comprar todo Aria</a>
-                                        <p class=" w-520 mt-1  text-base text-gray-500">
+                                        <p class=" lg:w-520 xs:w-620 mt-1  text-base text-gray-500">
                                             {{ $producto->descripcion }}</p>
                                         <p class="mt-1 text-lg font-medium text-red-800">{{ $producto->precio }}&euro;
                                         </p>
@@ -60,7 +60,7 @@
                                                 @csrf
                                                 @method('POST')
                                                 <button type="submit"
-                                                    class="px-10 py-2 text-lg text-white bg-black">Añadir al
+                                                    class="px-10 py-2 text-lg text-white xs:w-100px bg-black">Añadir al
                                                     carrito</button>
                                             </form>
 
