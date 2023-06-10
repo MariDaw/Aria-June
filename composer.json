@@ -11,10 +11,11 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
+        "spatie/laravel-cookie-consent": "^3.2",
         "stripe/stripe-php": "^10.3"
     },
     "require-dev": {
-        "beyondcode/laravel-er-diagram-generator": "^1.5",
+       
         "fakerphp/faker": "^1.9.1",
         "kevincobain2000/laravel-erd": "^1.6",
         "laravel/breeze": "^1.9",
