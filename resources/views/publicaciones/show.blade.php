@@ -115,17 +115,17 @@
                                                     </h2>
 
                                                     <div
-                                                        class="aspect-w-1 grid xs:grid-cols-1 aspect-h-1 lg:w-[400px] lg:h-[500px] md:w-[250px] md:h-[350px] xs:w-[150px] xs:h-[250px]  overflow-hidden rounded-md bg-gray-200  ">
-                                                        <a href="{{route('show/publicacion', [$publicacion])}}">
+                                                        class="aspect-w-1 grid sm:grid-cols-1 aspect-h-1 lg:w-[400px] lg:h-[500px] md:w-[250px] md:h-[350px] sm:w-[150px] sm:h-[350px]  overflow-hidden rounded-md bg-gray-200  ">
+                                                        {{-- <a href="{{route('show/publicacion', [$publicacion])}}"> --}}
 
                                                         <img  src="{!! asset('../'.$publicacion->foto) !!}"
                                                             alt="Publicación de {{$publicacion->titulo}}"
-                                                            class="h-96 w-96 object-cover object-center lg:h-full lg:w-full">
+                                                            class="h-96 w-96 object-cover object-center lg:h-full lg:w-full md:w-[250px] md:h-[350px] sm:w-[100px] sm:h-[250px] ">
                                                         </a>
 
                                                         </div>
 
-                                                    <div class="w-full mt-4 flex justify-between xs:grid xs:grid-cols-1">
+                                                    <div class="w-full mt-4 flex justify-between sm:grid sm:grid-cols-1">
                                                         <div>
                                                             <h3 class="text-sm text-gray-700">
                                                                 <a href="#">
@@ -185,21 +185,21 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class=" grid lg:grid-cols-2 xs:flex ml-10 mt-12 sm:mt-10 lg:w-2/3 lg:h-2/3 md:w-[250px] md:h-[350px] xs:w-[150px] xs:h-[50px] rounded-xl bg-gray-300  ">
-                                                                <div class="lg:mx-10  lg:mt-10 w-auto lg:h-1/2 md:mx-1 md:h-2/2 xs:h-1/2 xs:w-1/3 "><h1 class="lg:text-3xl md:text-1xl text-extrabold lg:mb-5 md:mb-2 md:mt-3 md:mr-9 text-black">PRENDAS</h1>
+                                                            <div class=" grid grid-cols-2 sm:grid-cols-1 ml-10 mt-12 sm:mt-10 lg:w-2/3 lg:h-auto md:w-[250px] md:h-auto sm:w-[150px] sm:h-auto rounded-xl bg-gray-300  ">
+                                                                <div class="lg:mx-10 lg:mt-10 w-auto h-auto md:mx-1  md:h-auto sm:h-auto sm:w-auto "><h1 class="lg:text-3xl md:text-1xl text-extrabold lg:mb-5 md:mb-2 lg:mt-2 lg:text-center md:mt-3 md:mr-9 text-black">PRENDAS</h1>
                                                                     @if (Auth::user()->rol == "admin")
                                                                     <a type="button" href="{{ route('link.create') }}" class="bg-indigo-500 px-12 py-2 rounded md:ml-6 md:mb-2 text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out">Nuevo LInk +</a>
                                                                     @endif
-                                                                @foreach ($publicacion->links as $link )
+                                                                    @foreach ($publicacion->links as $link )
 
 
-                                                                <li class="m-0 md:ml-5 md:mr-5"> <span class="text-bold md:ml-0 text-black">{{$link->prenda}}</span></br><a class="text-indigo-600 text-extrabold text-sm md:text-xs md:w-4/5 md:mr-5 m-0 h-1/3 md:h-3/3" href="{{$link->url}}">{{$link->url}}</a></li>
+                                                                <li class="m-0 lg:ml-2 lg:mr-2 md:ml-5 md:mr-5 "> <span class=" text-bold md:ml-0 text-black">{{$link->prenda}}</span></br><a class="break-words text-indigo-600 text-extrabold text-sm md:text-xs md:w-4/5 md:mr-5 m-0 h-1/3 md:h-3/3" href="{{$link->url}}">{{$link->url}}</a></li>
                                                                 @endforeach
                                                             </div>
                                                             </div>
                                                         </x-plantilla>
 
-                                                        <div class=" grid grid-cols-1 mx-32 align-middle justify-center ">
+                                                        <div class=" grid grid-cols-1 mx-32 md:mx-10 sm:mx-1 align-middle justify-center  md:mt-5 sm:mt-10 ">
                                                         <form class="w-full " action="{{ route('anadircomentario') }}"
                                                             method="POST">
                                                             @csrf

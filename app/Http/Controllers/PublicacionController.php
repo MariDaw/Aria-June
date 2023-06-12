@@ -49,12 +49,11 @@ class PublicacionController extends Controller
     {
         $publicacion = new Publicacion();
         $link = new Link();
-        $data = Publicacion::join('links', 'links.publicacion_id', '=', 'publicacions.id');
+        // $data = Publicacion::join('links', 'links.publicacion_id', '=', 'publicacions.id');
 
         return view('publicaciones.create', [
             'publicacion' => $publicacion,
             'link' => $link,
-            'data' => $data,
         ]);
 
         return view('publicaciones.create');
@@ -72,14 +71,15 @@ class PublicacionController extends Controller
             'titulo' => 'required',
             'descripcion' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,svg|max:1024',
+            'prenda' => 'required|array',
+            'prenda.*' => 'required|string',
+            'url' => 'required|array',
+            'url.*' => 'required|url',
 
 
         ]);
 
         $data = new Publicacion();
-
-
-
         $data->titulo = $request->titulo;
         $data->descripcion = $request->descripcion;
 
@@ -92,6 +92,17 @@ class PublicacionController extends Controller
          }
 
          $data->save();
+
+         $link = new Link;
+
+         $link->prenda = $request->prenda;
+         $link->url = $request->url;
+         $publicacionId = $data->id;
+         $link->publicacion_id = $publicacionId;
+
+         $link->save();
+
+
 
 
          return redirect()->route('publicaciones.index');
@@ -173,18 +184,24 @@ class PublicacionController extends Controller
 
 
 
-    public function destroy(Publicacion $publicacion, Save $save)
+    public function destroy($id)
     {
 
-        // Buscas al padre
-        $debu = Publicacion::where('id', $publicacion->id)->first();
+        // borrar el padre
+
+        // dd($publicacion);
+        $debu = Publicacion::where('id', $id)->first();
 
 
-        $resultSa = Save::where('publicacion_id', $publicacion->id);
+        $resultSa = Save::where('publicacion_id', $id);
         $resultSa->delete();
 
-        $resultLi = Link::where('publicacion_id', $publicacion->id);
+        $resultLi = Link::where('publicacion_id', $id);
         $resultLi->delete();
+
+        $resultLi = Comentario::where('publicacion_id', $id);
+        $resultLi->delete();
+
 
         $debu->delete();
 

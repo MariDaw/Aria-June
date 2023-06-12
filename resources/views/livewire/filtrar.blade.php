@@ -80,7 +80,7 @@
                                                                     @endif --}}
 
                                                                 {{-- @if ($publicacion->save->estado == 'Save') --}}
-                                                                <button type="submit"  class="px-4 py-1 text-sm text-white bg-red-400 rounded">Save</button>
+                                                                <button type="submit" id="addToCartButton" class="add-to-cart-button"  class="px-4 py-1 text-sm text-white bg-red-400 rounded">Save</button>
                                                                 {{-- @else --}}
                                                                 {{-- <button type="submit"  class="px-4 py-1 text-sm text-white bg-green-400 rounded">Saved</button>
                                                                 @endif --}}
@@ -103,10 +103,11 @@
                                                                         class="px-4 py-1 lg:ml-40 md:ml-10 sm:ml-10 items-right text-sm text-red-600 bg-yellow-200 rounded">Editar</a>
 
 
-                                                                        <form method="post" action="/publicaciones/{{ $publicacion->id }}" >
+                                                                        <form action="{{ route('publicaciones.destroy', $publicacion->id) }}" method="post">
                                                                             @csrf
                                                                             @method('DELETE')
-                                                                            <button onclick="return confirm('¿Seguro? Borrarás la publicación')" class="px-4 py-1 mt-5 text-sm lg:ml-40 md:ml-10 sm:ml-10 text-white bg-black rounded" type="submit">Borrar</button>
+                                                                            <button onclick="return confirm('¿Seguro? Borrarás la publicación')"
+                                                                            class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
                                                                         </form>
 
 
@@ -139,4 +140,26 @@
 
 
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+                            <script>
+                                function addToCart($publicacion) {
+                                var button = document.getElementById('addToCartButton');
+
+                                axios.post('/publicaciones', { $publicacion: $publicacion })
+                                  .then(function(response) {
+                                    button.classList.add('added-to-cart');
+                                    button.innerText = 'Agregado al carrito';
+                                  })
+                                  .catch(function(error) {
+                                    console.error(error);
+                                  });
+}
+
+                            </script>
+                            <style>
+                                .added-to-cart {
+  background-color: green;
+  color: white;
+}
+                            </style>
     @livewireScripts

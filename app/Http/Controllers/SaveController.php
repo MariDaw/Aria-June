@@ -9,6 +9,7 @@ use App\Models\Producto;
 use App\Models\Publicacion;
 use App\Models\Save;
 use App\Models\Valoracion;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SaveController extends Controller
@@ -100,7 +101,7 @@ class SaveController extends Controller
     }
 
     /* Función que añade una publicación al perfil*/
-    public function anadiralperfil(Publicacion $publicacion)
+    public function anadiralperfil(Publicacion $publicacion, Request $request)
     {
         $save = Save::where('publicacion_id', $publicacion->id)->where('user_id', auth()->user()->id)->first();
 
@@ -115,6 +116,7 @@ class SaveController extends Controller
             return redirect()->back()->with('success', 'Publicación añadida al perfil.');
         }
 
+        
         $save->save();
 
         return redirect()->back()->with('success', 'Publicación añadida al perfil.');

@@ -13,7 +13,19 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
         },
+        screens: {
+            'sm': '374px',
+            // => @media (min-width: 374px) { ... }
+
+            'md': '960px',
+            // => @media (min-width: 960px) { ... }
+
+            'lg': '1440px',
+            // => @media (min-width: 1440px) { ... }
+        },
     },
 
     plugins: [require('@tailwindcss/forms')],
+
+
 };

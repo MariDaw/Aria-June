@@ -48,22 +48,35 @@ class LinkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'prenda' => 'required',
-            'url' => 'required',
-            'publicacion_id'
+            'prenda' => 'required|max:255',
+            'url' => 'required|url',
 
         ]);
+
+
 
         $data = new Link();
 
         $data->prenda = $request->prenda;
         $data->url = $request->url;
-        $data->publicacion_id = $request->publicacion_id;
+
+        $publicacion = Publicacion::where('id', $request->publicacion_id);
+        // $publicacion = Publicacion::find($request->publicacion_id);
+
+        // if ($publicacion) {
+        //     $data->publicacion_id = $publicacion->id;
+        //     $data->save();
+
+        //     return redirect()->route('publicaciones.index');
+        // }
 
 
-         $data->save();
+        $data->publicacion_id = $publicacion;
 
-         return redirect()->route('link.show');
+        $data->save();
+
+
+        return redirect()->route('publicaciones.index');
     }
 
     /**

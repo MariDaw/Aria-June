@@ -18,7 +18,7 @@
 
                                   </a>
                                 <div
-                                    class="mt-0 mx-10 grid lg:grid-cols-2 md:grid-cols-2 xs:grid-cols-1">
+                                    class="mt-0 mx-10 grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
 
                                     <div class="lg:group lg:relative  ">
                                         {{-- <h2 class="text-3xl mt-0 mb-3 text-gray-700">
@@ -29,24 +29,24 @@
                                                    </h2> --}}
 
                                         <div
-                                            class=" flex lg:ml-32 md:ml-5 xs:ml-5 md:mr-10 md:mt-16 xs:mt-10 aspect-w-1 aspect-h-1 lg:w-[400px] lg:h-[500px] md:w-[280px] md:h-[380px] sm:w-[280px] sm:h-[380px]  overflow-hidden rounded-md bg-gray-200  ">
-                                            <a href="{{ route('show/producto', [$producto]) }}">
+                                            class=" flex lg:ml-32 md:ml-0 sm:ml-0 sm:mt-5 sm:pb-0  md:mt-26  aspect-w-1 aspect-h-1 lg:w-[400px] lg:h-[500px] md:w-[280px] md:h-[380px] sm:w-[200px] sm:h-[300px]  overflow-hidden rounded-md bg-gray-200  ">
+                                            <a href="{{ route('show/producto', [$producto]) }}" class="">
 
                                                 <img src="{{asset('../'.$producto->imagen)}}"
                                                     alt="Producto"
-                                                    class="h-96 w-96 p-12   bg-white object-center lg:h-full lg:w-full">{{$producto->imagen}}
+                                                    class="h-96 w-96 lg:p-12 sm:p-6   bg-white object-center lg:h-full lg:w-full md:w-[300px] md:h-[400px] ">{{$producto->imagen}}
                                             </a>
                                         </div>
                                         </div>
-                                        <div class=" my-28 py-0 text-left pl-10 xs:mt-3" style="font-family: 'Roboto Condensed', sans-serif">
-                                        <h3 class="mb-0 xs:ml-10 text-4xl text-black text-bold ">{{ $producto->titulo }}</h3>
-                                        <div class="border mb-5 mr-32 border-b-2"></div>
-                                        <a href="{{ route('productos.index') }}" class=" text-xs text-lime-600 border-b-black-2">Comprar todo Aria</a>
-                                        <p class=" lg:w-520 xs:w-620 mt-1  text-base text-gray-500">
+                                        <div class="lg:my-28 md:my-12 sm:mt-6 lg:py-0 lg:text-left lg:pl-10  " style="font-family: 'Roboto Condensed', sans-serif">
+                                        <h3 class="lg:mb-0 sm:mt-3 text-4xl text-black text-bold ">{{ $producto->titulo }}</h3>
+                                        <div class="border mb-5 lg:mr-32 border-b-2"></div>
+                                        <a href="{{ route('productos.index') }}" class=" lg:text-xs sm:text-sm text-lime-600  border-b-black-2">Comprar todo Aria</a>
+                                        <p class=" lg:w-520 sm:w-620 mt-1  text-base text-gray-500">
                                             {{ $producto->descripcion }}</p>
-                                        <p class="mt-1 text-lg font-medium text-red-800">{{ $producto->precio }}&euro;
+                                        <p class="lg:mt-1 text-lg font-medium text-red-800">{{ $producto->precio }}&euro;
                                         </p>
-                                        <div class="text-sm mt-5 text-gray-900 ">
+                                        <div class="lg:text-sm lg:mt-5 sm:mt-0 text-gray-900 ">
                                             <form action="{{ route('productoperfil', $producto) }}" method="POST">
                                                 @csrf
                                                 @method('POST')
@@ -55,12 +55,12 @@
                                             </form>
 
                                         </div>
-                                        <div class="text-sm mt-5 text-gray-900 ">
+                                        <div class="text-sm lg:mt-5 sm:mt-0  text-gray-900 ">
                                             <form action="{{ route('anadiralcarrito', $producto) }}" method="POST">
                                                 @csrf
                                                 @method('POST')
                                                 <button type="submit"
-                                                    class="px-10 py-2 text-lg text-white xs:w-100px bg-black">Añadir al
+                                                    class="px-10 py-2 text-lg text-white  bg-black">Añadir al
                                                     carrito</button>
                                             </form>
 
