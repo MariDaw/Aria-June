@@ -147,9 +147,11 @@ class PublicacionController extends Controller
     public function edit($id)
     {
         $publicacion = Publicacion::findOrFail($id);
+        $link = Link::findOrFail($id);
 
         return view('publicaciones.edit', [
             'publicacion' => $publicacion,
+            'link' => $link,
         ]);
 
     }
@@ -166,7 +168,11 @@ class PublicacionController extends Controller
         $request->validate([
             'titulo' => 'required',
             'descripcion' => 'required',
-            'foto' => ''
+            'foto' => '',
+            'prenda' => 'required|array',
+            'prenda.*' => 'required|string',
+            'url' => 'required|array',
+            'url.*' => 'required|url',
         ]);
 
         $publicacion = Publicacion::where('id', $publi)->first();
@@ -182,6 +188,20 @@ class PublicacionController extends Controller
         }
 
          $publicacion->save();
+
+         $prendaValues = $request->prenda;
+        $urlValues = $request->url;
+
+        $count = min(count($prendaValues), count($urlValues));
+
+        for ($i = 0; $i < $count; $i++) {
+            $link = new Link();
+            $link->prenda = $prendaValues[$i];
+            $link->url = $urlValues[$i];
+            $link->publicacion_id = $publicacion->id;
+            $link->save();
+        }
+
          return redirect()->route('publicaciones.index');
     }
 

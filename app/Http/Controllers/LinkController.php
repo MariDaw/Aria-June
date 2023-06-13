@@ -122,6 +122,11 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
-        //
+        $result = Link::where('id', $link->id)->first();
+
+        $result->delete();
+
+        return redirect()->route('publicaciones.index');
+
     }
 }

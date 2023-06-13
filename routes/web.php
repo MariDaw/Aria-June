@@ -138,14 +138,10 @@ Route::middleware(['auth', 'can:solo-admin'])->group(function () {
 
     Route::resource('/productos', ProductoController::class);
     Route::resource('/publicaciones', PublicacionController::class);
-    Route::delete('/publicaciones/{id}', [PublicacionController::class, 'destroy']);
-    // Route::resource('/publicaciones/{id}/destroy', PublicacionController::class);
     Route::resource('/link', LinkController::class);
-    Route::get('publicaciones/{id}', [LinkController::class, 'show'])->name('publicaciones.show');
-    Route::post('publicaciones/{publicacion}/links', [LinkController::class, 'store'])->name('links.store');
-    Route::post('links/{publicacion}', [LinkController::class, 'store'])->name('link.store');
 
-    // Route::post('/publicaciones/{publicacion}/link', [LinkController::class, 'create'])->name('link.create');
+    Route::delete('/publicaciones/{id}', [PublicacionController::class, 'destroy']);
+    // Route::get('publicaciones/{id}', [LinkController::class, 'show'])->name('publicaciones.show');
 
 
 });
