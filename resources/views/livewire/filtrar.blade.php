@@ -80,7 +80,7 @@
                                                                     @endif --}}
 
                                                                 {{-- @if ($publicacion->save->estado == 'Save') --}}
-                                                                <button type="submit" id="addToCartButton" class="add-to-cart-button"  class="px-4 py-1 text-sm text-white bg-red-400 rounded">Save</button>
+                                                                <button type="submit"   class="px-4 py-1 text-sm text-white bg-red-400 rounded">Save</button>
                                                                 {{-- @else --}}
                                                                 {{-- <button type="submit"  class="px-4 py-1 text-sm text-white bg-green-400 rounded">Saved</button>
                                                                 @endif --}}
@@ -141,25 +141,5 @@
 
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-                            <script>
-                                function addToCart($publicacion) {
-                                var button = document.getElementById('addToCartButton');
 
-                                axios.post('/publicaciones', { $publicacion: $publicacion })
-                                  .then(function(response) {
-                                    button.classList.add('added-to-cart');
-                                    button.innerText = 'Agregado al carrito';
-                                  })
-                                  .catch(function(error) {
-                                    console.error(error);
-                                  });
-}
-
-                            </script>
-                            <style>
-                                .added-to-cart {
-  background-color: green;
-  color: white;
-}
-                            </style>
     @livewireScripts

@@ -9,7 +9,7 @@ use App\Models\Producto;
 use App\Models\Publicacion;
 use App\Models\Save;
 use App\Models\Valoracion;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SaveController extends Controller
@@ -116,7 +116,7 @@ class SaveController extends Controller
             return redirect()->back()->with('success', 'Publicación añadida al perfil.');
         }
 
-        
+
         $save->save();
 
         return redirect()->back()->with('success', 'Publicación añadida al perfil.');

@@ -185,15 +185,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class=" grid grid-cols-2 sm:grid-cols-1 ml-10 mt-12 sm:mt-10 lg:w-2/3 lg:h-auto md:w-[250px] md:h-auto sm:w-[150px] sm:h-auto rounded-xl bg-gray-300  ">
-                                                                <div class="lg:mx-10 lg:mt-10 w-auto h-auto md:mx-1  md:h-auto sm:h-auto sm:w-auto "><h1 class="lg:text-3xl md:text-1xl text-extrabold lg:mb-5 md:mb-2 lg:mt-2 lg:text-center md:mt-3 md:mr-9 text-black">PRENDAS</h1>
+                                                            <div class=" grid grid-cols-2 sm:grid-cols-1 ml-10 mt-12 sm:mt-10 lg:w-2/3 lg:h-auto md:w-[250px] md:h-auto sm:w-[150px] sm:h-auto rounded-xl bg-gray-300 border ">
+                                                                <div class="lg:mx-8 lg:mt-10 w-auto h-auto md:mx-1  md:h-auto sm:h-auto sm:w-auto "><h1 class="lg:text-3xl md:text-1xl text-extrabold lg:mb-5 md:mb-2 lg:mt-2 lg:text-center md:mt-3 md:mr-9 text-black">PRENDAS</h1>
                                                                     @if (Auth::user()->rol == "admin")
-                                                                    <a type="button" href="{{ route('link.create') }}" class="bg-indigo-500 px-12 py-2 rounded md:ml-6 md:mb-2 text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out">Nuevo LInk +</a>
+                                                                    <a type="button" href="{{ route('link.create') }}" class="bg-indigo-500 mx-8 px-12 py-2 rounded md:ml-6 md:mb-2 text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out">Nuevo LInk +</a>
+
                                                                     @endif
                                                                     @foreach ($publicacion->links as $link )
 
 
-                                                                <li class="m-0 lg:ml-2 lg:mr-2 md:ml-5 md:mr-5 "> <span class=" text-bold md:ml-0 text-black">{{$link->prenda}}</span></br><a class="break-words text-indigo-600 text-extrabold text-sm md:text-xs md:w-4/5 md:mr-5 m-0 h-1/3 md:h-3/3" href="{{$link->url}}">{{$link->url}}</a></li>
+                                                                <li class=" lg:ml-2 lg:mr-2 md:ml-5 md:mr-5 "> <span class="text-bold md:ml-0 text-black">{{$link->prenda}}</span></br><a style="word-wrap: break-word;" class="m-8 text-indigo-600 text-extrabold w-1/3 lg:text-lg md:text-xs md:w-auto md:mr-5  h-1/3 md:h-3/3 border border-black" href="{{$link->url}}">{{$link->url}}</a></li>
                                                                 @endforeach
                                                             </div>
                                                             </div>

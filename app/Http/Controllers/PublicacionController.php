@@ -93,14 +93,19 @@ class PublicacionController extends Controller
 
          $data->save();
 
-         $link = new Link;
 
-         $link->prenda = $request->prenda;
-         $link->url = $request->url;
-         $publicacionId = $data->id;
-         $link->publicacion_id = $publicacionId;
+        $prendaValues = $request->prenda;
+        $urlValues = $request->url;
 
-         $link->save();
+        $count = min(count($prendaValues), count($urlValues));
+
+        for ($i = 0; $i < $count; $i++) {
+            $link = new Link();
+            $link->prenda = $prendaValues[$i];
+            $link->url = $urlValues[$i];
+            $link->publicacion_id = $data->id;
+            $link->save();
+        }
 
 
 
@@ -114,15 +119,21 @@ class PublicacionController extends Controller
      * @param  \App\Models\Publicacion  $publicacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Publicacion $publicacion)
+    public function show($id)
     {
 
+        $publicacion = Publicacion::find($id);
+
+    if (!$publicacion) {
+        abort(404); // Handle the case when the publicacion is not found
+    }
+
         $valoraciones = Valoracion::all();
-        $links = Link::all();
+        $link = Link::all();
         return view('publicaciones.show', [
             'publicacion' => $publicacion,
             'valoraciones' => $valoraciones,
-            'links' => $links,
+            'links' => $link,
 
         ]);
     }

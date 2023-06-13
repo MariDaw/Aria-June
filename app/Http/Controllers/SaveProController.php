@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateSaveProRequest;
 use App\Models\Producto;
 use App\Models\Save;
 use App\Models\SavePro;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SaveProController extends Controller
@@ -108,23 +109,15 @@ class SaveProController extends Controller
             return redirect()->back()->with('success', 'Producto añadido al perfil.');
         }
 
+        $savePros->save();
+
+        return redirect()->back()->with('success', 'Producto añadido al perfil.');
+
     }
 
-    public $classChanged = false;
 
-    public $isSetClicked = false;
-    public $isAddClicked = false;
-    public function myClickFunction()
-    {
-        $this->classChanged = true;
-    }
 
-    public function SetClicked()
-    {
-     //this will give you toggling behavior
-     $this->isSetClicked == false ? $this->isSetClicked = true : $this->isSetClicked = false;
-    }
-
+    
     /* Función que elimina un producto del perfil*/
 
     public function unproduct($id)

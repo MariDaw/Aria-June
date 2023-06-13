@@ -18,7 +18,14 @@ class LinkController extends Controller
      */
     public function index()
     {
-        //
+
+        $publicacion = Publicacion::all();
+        $link = Link::all();
+
+        return view('publicaciones.show', [
+            'publicacion' => $publicacion,
+            'link' => $link,
+        ]);
     }
 
     /**
@@ -28,6 +35,7 @@ class LinkController extends Controller
      */
     public function create()
     {
+
         $publicacion = new Publicacion();
         $link = new Link();
 
@@ -45,7 +53,7 @@ class LinkController extends Controller
      * @param  \App\Http\Requests\StoreLinkRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Publicacion $publicacion)
     {
         $request->validate([
             'prenda' => 'required|max:255',
@@ -53,30 +61,15 @@ class LinkController extends Controller
 
         ]);
 
+        $link = new Link();
+        $link->prenda = $request->prenda;
+        $link->url = $request->url;
+        $link->publicacion_id = $publicacion->id;
 
+        $link->save();
 
-        $data = new Link();
-
-        $data->prenda = $request->prenda;
-        $data->url = $request->url;
-
-        $publicacion = Publicacion::where('id', $request->publicacion_id);
-        // $publicacion = Publicacion::find($request->publicacion_id);
-
-        // if ($publicacion) {
-        //     $data->publicacion_id = $publicacion->id;
-        //     $data->save();
-
-        //     return redirect()->route('publicaciones.index');
-        // }
-
-
-        $data->publicacion_id = $publicacion;
-
-        $data->save();
-
-
-        return redirect()->route('publicaciones.index');
+        return redirect()->route('publicaciones.index')->with('success', 'Enlace creado exitosamente.');
+        // return redirect()->route('publicaciones.show', $publicacion)->with('success', 'Enlace creado exitosamente.');
     }
 
     /**

@@ -74,10 +74,10 @@
                                                             al carrito</button>
                                                     </form>
                                                      <!-- Añadir producto al perfil -->
-                                                    <form action="{{ route('productoperfil', $producto) }}" method="POST">
+                                                    <form action="{{ route('productoperfil', $producto) }}" method="POST" >
                                                         @csrf
                                                         @method('POST')
-                                                        <button type="submit" id="savePro"  class=" px-4 py-1 text-sm ml-16 text-white mb-5 bg-black  rounded">Save</button>
+                                                        <button type="submit"  class=" px-4 py-1 text-sm ml-16 text-white mb-5 bg-black  rounded">Save</button>
 
                                                     </form>
 
@@ -114,17 +114,7 @@
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+
+
+
     @livewireScripts
-
-<script>
-    var buttons = document.querySelectorAll("#savePro");
-
-
-
-
-</script>
-<style>
-    .active {
-  background: blue;
-}
-</style>

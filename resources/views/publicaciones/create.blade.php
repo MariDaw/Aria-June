@@ -37,9 +37,6 @@
 
                             <h3>PRENDAS</h3>
 
-
-
-
                             <div class="form-group">
                                 <label for="links">Links por prenda:</label>
 
@@ -50,17 +47,17 @@
                                                 class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('prenda') text-red-500 @enderror">
                                                 Prenda:
                                             </label>
-                                            <input type="text" name="prenda"  required
+                                            <input type="text" name="prenda[]"  required
                                                 class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('prenda') border-red-500 @enderror"
                                                 value="{{ old('prenda', $link->prenda) }}">
                                         </div>
-                                        {{-- <input type="text" name="links[]" class="form-control" placeholder="Link"> --}}
+
                                         <div class="grid grid-cols-1">
                                             <label for="url"
                                                 class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('url') text-red-500 @enderror">
                                                 URL:
                                             </label>
-                                            <input type="text" name="url"  required
+                                            <input type="text" name="url[]"  required
                                                 class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('url') border-red-500 @enderror"
                                                 value="{{ old('url', $link->url) }}">
                                         </div>
@@ -130,8 +127,25 @@
         var prendaDiv = document.createElement('div');
         prendaDiv.classList.add('prenda');
         prendaDiv.innerHTML = `
-            <input type="text" name="prenda[]" placeholder="Nombre de la prenda">
-            <input type="text" name="url[]" placeholder="URL del enlace">
+                                        <div class="grid grid-cols-1">
+                                            <label for="prenda"
+                                                class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('prenda') text-red-500 @enderror">
+                                                Prenda:
+                                            </label>
+                                            <input type="text" name="prenda[]"  required
+                                                class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('prenda') border-red-500 @enderror"
+                                                value="{{ old('prenda', $link->prenda) }}">
+                                        </div>
+
+                                        <div class="grid grid-cols-1">
+                                            <label for="url"
+                                                class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold @error('url') text-red-500 @enderror">
+                                                URL:
+                                            </label>
+                                            <input type="text" name="url[]"  required
+                                                class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent @error('url') border-red-500 @enderror"
+                                                value="{{ old('url', $link->url) }}">
+                                        </div>
         `;
         prendasContainer.appendChild(prendaDiv);
     });

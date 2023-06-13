@@ -141,32 +141,11 @@ Route::middleware(['auth', 'can:solo-admin'])->group(function () {
     Route::delete('/publicaciones/{id}', [PublicacionController::class, 'destroy']);
     // Route::resource('/publicaciones/{id}/destroy', PublicacionController::class);
     Route::resource('/link', LinkController::class);
+    Route::get('publicaciones/{id}', [LinkController::class, 'show'])->name('publicaciones.show');
+    Route::post('publicaciones/{publicacion}/links', [LinkController::class, 'store'])->name('links.store');
+    Route::post('links/{publicacion}', [LinkController::class, 'store'])->name('link.store');
 
-        // Route::get('/productos/index', [ProductoController::class, 'edit']);
-        // Route::get('/productos/index', [ProductoController::class, 'create']);
-        // Route::get('/productos/index', [ProductoController::class, 'store']);
-        // Route::get('/productos/index', [ProductoController::class, 'update']);
-
-
-        //     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
-        //     Route::get('/productos/{id}/store', [ProductoController::class, 'store']);
-        // Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
-        // Route::put('/productos/{id}', [ProductoController::class, 'update'])
-        //     ->name('productos.update');
-
-
-
-        // Route::get('/productos/index', [ProductoController::class, 'edit']);
-        // // Route::get('/productos/create/{id}', [ProductoController::class, 'create']);
-        // Route::post('/productos', [ProductoController::class, 'store'])
-        //     ->name('productos.store');
-
-
-
-        //     Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
-        // Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
-        // Route::put('/productos/{id}', [ProductoController::class, 'update'])
-        //     ->name('productos.update');
+    // Route::post('/publicaciones/{publicacion}/link', [LinkController::class, 'create'])->name('link.create');
 
 
 });
@@ -175,6 +154,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::resource('/productos', ProductoController::class);
     Route::resource('/publicaciones', PublicacionController::class);
     Route::resource('/link', LinkController::class);
+    Route::post('publicaciones/{publicacion}/links', [LinkController::class, 'store'])->name('links.store');
+    Route::get('publicaciones/{id}', [LinkController::class, 'show'])->name('publicaciones.show');
+    Route::post('links/{publicacion}', [LinkController::class, 'store'])->name('link.store');
+
+
+
+    // Route::post('/publicaciones/{publicacion}/links', [LinkController::class, 'create'])->name('links.create');
+
     // Route::resource('/link/create', [LinkController::class, 'create'])->name('link.create');
 
     Route::get('/dashboard', function(){
